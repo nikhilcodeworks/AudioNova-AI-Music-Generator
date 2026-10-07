@@ -19,3 +19,6 @@ build/
 .turbo/
 .venv/
 .DS_Store
+
+# Safe security ignores
+.env.local
