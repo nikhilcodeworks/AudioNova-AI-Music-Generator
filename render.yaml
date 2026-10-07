@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: audio-backend
+    env: python
+    rootDir: Backend               # ✅ Use lowercase "backend" (matches folder)
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn AudioNova.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: AudioNova.settings
+      - key: PYTHON_VERSION
+        value: 3.10
+      - key: DEBUG
+        value: "False"
+
+  - type: web
+    name: musicgen-api
+    env: python
+    rootDir: Audiocraftmg          # ✅ Use lowercase "audiocraftmg"
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10
